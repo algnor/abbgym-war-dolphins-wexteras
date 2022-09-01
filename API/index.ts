@@ -37,6 +37,12 @@ app.get('/saveHum', (req: Request, res: Response) => {
 
 })
 
+app.get('/setData', (req: Request, res: Response) => {
+    let rawSettings = fs.readFileSync("data/settings.json")
+    let settings = JSON.parse(String(rawSettings))
+    res.send(settings)
+})
+
 app.use('/data', express.static('data'))
 
 app.listen(port, () => {

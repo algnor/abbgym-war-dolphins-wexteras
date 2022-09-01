@@ -33,6 +33,11 @@ app.get('/saveHum', (req, res) => {
     fs_1.default.appendFileSync('data/humData.txt', hum + ", " + time + '\n');
     res.send(200);
 });
+app.get('/setData', (req, res) => {
+    let rawSettings = fs_1.default.readFileSync("data/settings.json");
+    let settings = JSON.parse(String(rawSettings));
+    res.send(settings);
+});
 app.use('/data', express_1.default.static('data'));
 app.listen(port, () => {
     console.log(`listening till port ${port}`);
