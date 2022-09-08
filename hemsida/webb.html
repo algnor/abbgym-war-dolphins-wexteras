@@ -1,9 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <link rel="stylesheet" href="webb.css">
+    <script src="webb.js"></script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> -->
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+    <title>wexterås</title>
 
 </head>
 
-<body>
-    <h1>
 
-    </h1>
+
+<body>
+
+
+    <div class="toolbar">
+        <p>wexterås</p>
+        <!-- <p>världens bästa växthus</p> -->
+
+    </div>
+
+    <!-- <div id="chart_div"></div> -->
+    <button id="button" class="fläkt" onClick="knapp()">fläkt</button>
+
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+    </label>
+    <h2>Temperatur</h2>
+    <canvas class="graf" id="graf" style="width: 600;max-width: 600px;"></canvas>
+    <button class="vattna" onClick="knapp()">vattna</button>
+
+
+    <h2>Fuktighet</h2>
+    <canvas class="graf" id="graph" style="width: 600;max-width: 600px;"></canvas>
+
+
+
+    <script>
+        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+
+        new Chart("graf", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(16,94,29)",
+                    borderColor: "rgba(16,94,29,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 6, max: 16 } }],
+                }
+            }
+        });
+
+        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+
+        new Chart("graph", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(0,0,255)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 6, max: 16 } }],
+                }
+            }
+        });
+        var count = 1;
+        function setColor(btn, color) {
+            var property = document.getElementById(btn);
+            if (count == 0) {
+                property.style.backgroundColor = "#FFFFFF"
+                count = 1;
+            }
+            else {
+                property.style.backgroundColor = "#7FFF00"
+                count = 0;
+            }
+        }
+    </script>
 </body>
+
+</html>
