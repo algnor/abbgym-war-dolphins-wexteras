@@ -15,6 +15,8 @@ app.get('/savetemp', (req: Request, res: Response) => {
     let temp = String(req.query.data)
     let time = Date.now()
 
+    console.log("saving temperature: ", temp, time)
+
     if (temp === 'undefined') {
         res.send(400)
         return
@@ -28,6 +30,8 @@ app.get('/saveHum', (req: Request, res: Response) => {
     let hum = String(req.query.data)
     let time = Date.now()
 
+    console.log("saving humidity: ", hum, time)
+
     if (hum === 'undefined') {
         res.send(400)
         return
@@ -38,12 +42,22 @@ app.get('/saveHum', (req: Request, res: Response) => {
 })
 
 app.get('/setData', (req: Request, res: Response) => {
+    let data = req.query
+
+    console.log("updating settings: ", data)
+
     let rawSettings = fs.readFileSync("data/settings.json")
     let settings = JSON.parse(String(rawSettings))
+    for (let x in data) {
+        settings[x] = data[x]
+    }
+    console.log(settings)
+    fs.writeFileSync("data/settings.json", JSON.stringify(settings))
     res.send(settings)
 })
 
 app.use('/data', express.static('data'))
+app.use('/', express.static("../hemsida"))
 
 app.listen(port, () => {
     console.log(`listening till port ${port}`)
