@@ -23,7 +23,7 @@ p {
 }
 
 html{
-background: url(https://jeroentaal.photography/wp-content/uploads/2019/03/JEROEN_TAAL-2019-02-25-france-la-serre-du-chirurgien-1042.jpg) no-repeat center fixed ;
+background: url(https://cdn.apartmenttherapy.info/image/upload/v1586153209/at/news-culture/2020-04/200402-bloomscape-zoom-3.png) no-repeat center fixed ;
 background-size: cover;
 /* background-color: rgba(0,0,0,0.8); */
 }
@@ -64,8 +64,15 @@ button{
 /* .fläkt:active {
     background-color: #ffbf00;
 }  */
-
-
+.vattna {
+  background-color: green; 
+  color: black; 
+  /* border: 2px solid #4CAF50; */
+}
+ .vattna:hover {
+  background-color: #4CAF50;
+  color: white;
+} 
 
 .graf{
     background-color: rgb(255, 255, 255);

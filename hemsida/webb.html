@@ -28,7 +28,7 @@
     </div>
 
     <!-- <div id="chart_div"></div> -->
-    <button id="button" class="fläkt" onClick="knapp()">fläkt</button>
+    <button type="button" value="fläkt" onClick="knapp()">FLÄKT</button>
 
     <label class="switch">
         <input type="checkbox">
@@ -36,7 +36,7 @@
     </label>
     <h2>Temperatur</h2>
     <canvas class="graf" id="graf" style="width: 600;max-width: 600px;"></canvas>
-    <button class="vattna" onClick="knapp()">vattna</button>
+    <button type="button" value="vattna" onClick="knapp()">VATTNA</button>
 
 
     <h2>Fuktighet</h2>
@@ -78,8 +78,8 @@
                 datasets: [{
                     fill: false,
                     lineTension: 0,
-                    backgroundColor: "rgb(0,0,255)",
-                    borderColor: "rgba(0,0,255,0.1)",
+                    backgroundColor: "rgb(16,94,29)",
+                    borderColor: "rgba(16,94,29,0.1)",
                     data: yValues
                 }]
             },
@@ -102,6 +102,12 @@
                 count = 0;
             }
         }
+
+
+        // function knapp();
+        // {
+        //     document.getElementById("myButton1").value = "Close Curtain";
+        // }
     </script>
 </body>
 
