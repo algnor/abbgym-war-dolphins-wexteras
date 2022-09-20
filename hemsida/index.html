@@ -35,61 +35,87 @@
         <span class="slider round"></span>
     </label>
     <h2>Temperatur</h2>
-    <canvas class="graf" id="graf" style="width: 600;max-width: 600px;"></canvas>
+    <canvas class="graf" id="tempGraph" style="width: 600;max-width: 600px;"></canvas>
     <button type="button" value="vattna" onClick="knapp()">VATTNA</button>
 
 
     <h2>Fuktighet</h2>
-    <canvas class="graf" id="graph" style="width: 600;max-width: 600px;"></canvas>
+    <canvas class="graf" id="humGraph" style="width: 600;max-width: 600px;"></canvas>
 
 
 
     <script>
-        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+        fetch("data/tempData.txt")
+            .then(data => { return data.text() })
+            .then(res => {
 
-        new Chart("graf", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgb(16,94,29)",
-                    borderColor: "rgba(16,94,29,0.1)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                scales: {
-                    yAxes: [{ ticks: { min: 6, max: 16 } }],
-                }
-            }
-        });
+                let xdata = []
+                let ydata = []
 
-        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+                console.log(res)
+                res.split("\n").forEach(function (item, index) {
+                    data = item.split(",")
+                    if (data[0]) {
+                        xdata.push(data[1])
+                        ydata.push(data[0])
+                    }
+                })
 
-        new Chart("graph", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgb(16,94,29)",
-                    borderColor: "rgba(16,94,29,0.1)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                scales: {
-                    yAxes: [{ ticks: { min: 6, max: 16 } }],
-                }
-            }
-        });
+                console.log(ydata)
+
+                new Chart("tempGraph", {
+                    type: "line",
+                    data: {
+                        labels: xdata,
+                        datasets: [{
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgb(16,94,29)",
+                            borderColor: "rgba(16,94,29,0.1)",
+                            data: ydata
+                        }]
+                    },
+                    options: {
+                        legend: { display: false },
+                    }
+                });
+            })
+
+        fetch("data/humData.txt")
+            .then(data => { return data.text() })
+            .then(res => {
+
+                let xdata = []
+                let ydata = []
+
+                console.log(res)
+                res.split("\n").forEach(function (item, index) {
+                    data = item.split(",")
+                    if (data[0]) {
+                        xdata.push(data[1])
+                        ydata.push(data[0])
+                    }
+                })
+
+                console.log(ydata)
+
+                new Chart("humGraph", {
+                    type: "line",
+                    data: {
+                        labels: xdata,
+                        datasets: [{
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgb(16,94,29)",
+                            borderColor: "rgba(16,94,29,0.1)",
+                            data: ydata
+                        }]
+                    },
+                    options: {
+                        legend: { display: false },
+                    }
+                });
+            })
         var count = 1;
         function setColor(btn, color) {
             var property = document.getElementById(btn);
