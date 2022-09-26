@@ -23,12 +23,12 @@
 
     <div class="toolbar">
         <h2>wexterås</h2>
-        <!-- <p>världens bästa växthus</p> -->
+        <p>världens bästa växthus</p>
 
     </div>
 
     <!-- <div id="chart_div"></div> -->
-    <button type="button" value="fläkt" onClick="knapp()">FLÄKT</button>
+    <button type="button" value="fläkt" onClick="fan()">FLÄKT</button>
 
     <label class="switch">
         <input type="checkbox">
@@ -36,7 +36,7 @@
     </label>
     <h2>Temperatur</h2>
     <canvas class="graf" id="tempGraph" style="width: 600;max-width: 600px;"></canvas>
-    <button type="button" value="vattna" onClick="knapp()">VATTNA</button>
+    <button type="button" value="vattna" onClick="vattna()">VATTNA</button>
 
 
     <h2>Fuktighet</h2>
@@ -78,7 +78,7 @@
                     options: {
                         legend: { display: false },
                     }
-                });
+                })
             })
 
         fetch("data/humData.txt")
@@ -114,18 +114,18 @@
                     options: {
                         legend: { display: false },
                     }
-                });
+                })
             })
-        var count = 1;
-        function setColor(btn, color) {
-            var property = document.getElementById(btn);
+        var count = 1
+        function setColor (btn, color) {
+            var property = document.getElementById(btn)
             if (count == 0) {
                 property.style.backgroundColor = "#FFFFFF"
-                count = 1;
+                count = 1
             }
             else {
                 property.style.backgroundColor = "#7FFF00"
-                count = 0;
+                count = 0
             }
         }
 
