@@ -4,62 +4,61 @@ const app = express()
 const port = 3000
 
 app.get('/hej', (req: Request, res: Response) => {
-    res.send('hej!')
+  res.send('hej!')
 })
 
 app.get('/gettime', (req: Request, res: Response) => {
-    res.send(new Date().toISOString())
+  res.send(new Date().toISOString())
 })
 
-app.get('/savetemp', (req: Request, res: Response) => {
-    let temp = String(req.query.data)
-    let time = Date.now()
+app.get('/saveData', (req: Request, res: Response) => {
+  let temp = String(req.query.temp)
+  let hum = String(req.query.hum)
+  let time = Date.now()
 
-    console.log("saving temperature: ", temp, time)
+  console.log("saving temperature: ", temp, time)
 
-    if (temp === 'undefined') {
-        res.send(400)
-        return
-    }
+  if (temp !== 'undefined') {
     fs.appendFileSync('data/tempData.txt', temp + ", " + time + '\n')
-    res.send(200)
+  }
 
-})
 
-app.get('/saveHum', (req: Request, res: Response) => {
-    let hum = String(req.query.data)
-    let time = Date.now()
 
-    console.log("saving humidity: ", hum, time)
+  console.log("saving humidity: ", hum, time)
 
-    if (hum === 'undefined') {
-        res.send(400)
-        return
-    }
+  if (hum !== 'undefined') {
     fs.appendFileSync('data/humData.txt', hum + ", " + time + '\n')
-    res.send(200)
-
+  }
+  res.sendStatus(200)
 })
 
-app.get('/setData', (req: Request, res: Response) => {
-    let data = req.query
 
-    console.log("updating settings: ", data)
+app.get('/settings', (req: Request, res: Response) => {
+  let data = req.query
 
-    let rawSettings = fs.readFileSync("data/settings.json")
-    let settings = JSON.parse(String(rawSettings))
-    for (let x in data) {
-        settings[x] = data[x]
+  console.log("updating settings: ", data)
+
+  let rawSettings = fs.readFileSync("data/settings.json")
+  let settings = JSON.parse(String(rawSettings))
+  for (let x in data) {
+    settings[x] = data[x]
+    if (data[x] === "true" || data[x] === "false") {
+      settings[x] = data[x] ==="true"
+      continue
     }
-    console.log(settings)
-    fs.writeFileSync("data/settings.json", JSON.stringify(settings))
-    res.send(settings)
+    if (!isNaN(Number(data[x]))) {
+      settings[x] = Number(data[x])
+    }
+  }
+  console.log(settings)
+  fs.writeFileSync("data/settings.json", JSON.stringify(settings))
+  res.send(settings)
 })
 
 app.use('/data', express.static('data'))
 app.use('/', express.static("../hemsida"))
 
 app.listen(port, () => {
-    console.log(`listening till port ${port}`)
+  console.log(`listening till port ${port}`)
 })
 
