@@ -157,7 +157,8 @@ void loop()
       http.GET();
       http.end();
     }
-    if ((currentHumidity < 80.0) && (Fan_Adjust_State)) {
+    if ((currentHumidity < 80.0) && (Fan_Adjust_State))
+    {
       Fan_Adjust_State = false;
       http.begin(client, "http://" + String(IP) + "/settings?fan=0");
       http.GET();
@@ -171,7 +172,8 @@ void loop()
       http.GET();
       http.end();
     }
-    if ((currentTemp < 25.0) && (Roof_Adjust_State)) {
+    if ((currentTemp < 25.0) && (Roof_Adjust_State))
+    {
       Roof_Adjust_State = false;
       http.begin(client, "http://" + String(IP) + "/settings?roof=5");
       http.GET();
@@ -182,29 +184,32 @@ void loop()
     lastHttpCode = http.GET();
     DynamicJsonDocument doc(2048);
     deserializeJson(doc, http.getString());
-    //serializeJsonPretty(doc, Serial);
+    // serializeJsonPretty(doc, Serial);
     http.end();
 
     http.begin(client, "http://" + String(IP) + "/saveData?hum=" + String(currentHumidity) + "&temp=" + String(currentTemp));
     http.GET();
     http.end();
 
-    Mos_1_State = doc["fan"];
-    Mos_2_State = doc["led"];
-    Mos_3_State = doc["water"];
-
-    //Serial.println(Servo_State);
-    //Serial.println(int(doc["roof"]));
-
-    if (int(Servo_State) != int(doc["roof"]))
+    if (!doc.isNull())
     {
-      updateServo = -1;
-    }
+      Mos_1_State = doc["fan"];
+      Mos_2_State = doc["led"];
+      Mos_3_State = doc["water"];
 
-    Servo_State = doc["roof"];
-    analogWrite(MOS_1_PIN, Mos_1_State);
-    analogWrite(MOS_2_PIN, Mos_2_State);
-    digitalWrite(MOS_3_PIN, Mos_3_State);
+      // Serial.println(Servo_State);
+      // Serial.println(int(doc["roof"]));
+
+      if (int(Servo_State) != int(doc["roof"]))
+      {
+        updateServo = -1;
+      }
+
+      Servo_State = doc["roof"];
+      analogWrite(MOS_1_PIN, Mos_1_State);
+      analogWrite(MOS_2_PIN, Mos_2_State);
+      digitalWrite(MOS_3_PIN, Mos_3_State);
+    }
   }
 
   if (millis() > (lastScreenUpdate + SCREEN_DELAY))
@@ -226,7 +231,7 @@ void loop()
 
     display.setTextAlignment(TEXT_ALIGN_RIGHT);
     display.drawString(125, 16, "F" + String(Mos_1_State));
-    //display.drawString(125, 32, "L" + String(Mos_2_State));
+    // display.drawString(125, 32, "L" + String(Mos_2_State));
     display.drawString(125, 32, "W" + String(Mos_3_State));
     display.drawString(125, 48, "R" + String(Servo_State));
 
@@ -240,7 +245,7 @@ void loop()
     }
 
     display.setTextAlignment(TEXT_ALIGN_CENTER);
-    
+
     display.drawString(64, 0, "H" + String(lastHttpCode));
     display.drawString(64, 16, "S" + String(sensorCode));
 
