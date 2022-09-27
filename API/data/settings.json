@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+{"test":"12123123","id":"12","temp":"4","hum":"3","hu":"3","fan":"3"}
+=======
 {"fan":0,"roof":5,"led":0,"water":false,"led1":0,"led2":0,"watertrue":0,"waterfalse":0}
+>>>>>>> 3ce8a4adf049ee9d2579043b64a85e288fff08df
