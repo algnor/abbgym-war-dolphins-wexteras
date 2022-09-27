@@ -29,7 +29,7 @@ app.get('/saveData', (req: Request, res: Response) => {
   if (hum !== 'undefined') {
     fs.appendFileSync('data/humData.txt', hum + ", " + time + '\n')
   }
-  res.send(200)
+  res.sendStatus(200)
 })
 
 
