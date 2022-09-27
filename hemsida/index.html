@@ -45,8 +45,13 @@
 
 
     <script>
-        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+        var xValues = []
+        for (i = 0; i < 10; i++) {
+            xValues[i] = new Date()
+            xValues[i].setHours(i)
+            xValues[i] = String(xValues[i].getHours()) + ":" + String(xValues[i].getMinutes())
+        }
+        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
 
         new Chart("graf", {
             type: "line",
@@ -66,10 +71,10 @@
                     yAxes: [{ ticks: { min: 6, max: 16 } }],
                 }
             }
-        });
+        })
 
-        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]
+        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
 
         new Chart("graph", {
             type: "line",
@@ -89,17 +94,17 @@
                     yAxes: [{ ticks: { min: 6, max: 16 } }],
                 }
             }
-        });
-        var count = 1;
-        function setColor(btn, color) {
-            var property = document.getElementById(btn);
+        })
+        var count = 1
+        function setColor (btn, color) {
+            var property = document.getElementById(btn)
             if (count == 0) {
                 property.style.backgroundColor = "#FFFFFF"
-                count = 1;
+                count = 1
             }
             else {
                 property.style.backgroundColor = "#7FFF00"
-                count = 0;
+                count = 0
             }
         }
 
